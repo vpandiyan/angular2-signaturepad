@@ -57,8 +57,13 @@ export class SignaturePad {
     // and only part of the canvas is cleared then.
     const ratio: number = Math.max(window.devicePixelRatio || 1, 1);
     const canvas: any = this.signaturePad._canvas;
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
+     if( window.screen.width < 768){ 
+	    canvas.width = window.screen.width * ratio;
+	    canvas.height = (window.screen.height - 125 )* ratio;
+	}else{
+	    canvas.width = canvas.offsetWidth * ratio;
+	    canvas.height = (canvas.offsetHeight - 110) * ratio;
+	} 
     canvas.getContext('2d').scale(ratio, ratio);
     this.signaturePad.clear(); // otherwise isEmpty() might return incorrect value
   }
